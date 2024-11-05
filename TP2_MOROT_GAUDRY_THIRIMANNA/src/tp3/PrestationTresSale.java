@@ -1,7 +1,7 @@
 package tp3;
 
-public class PrestationTresSale extends PrestationSale {
-    private int typeSalissure; // 1 à 4
+class PrestationTresSale extends PrestationSale {
+    private int typeSalissure;
 
     public PrestationTresSale(char categorieVehicule, int typeSalissure) {
         super(categorieVehicule);
@@ -10,12 +10,29 @@ public class PrestationTresSale extends PrestationSale {
 
     @Override
     public double calculerPrixTotal() {
-        double prix = super.calculerPrixTotal();
-        prix += calculerSurcoutTypeSalissure();
-        return prix;
+        double surcout = 0;
+        switch (typeSalissure) {
+            case 1:  // Taches de nourriture
+                surcout = 5;
+                break;
+            case 2:  // Taches de boue
+                surcout = 10;
+                break;
+            case 3:  // Taches de transpiration
+                surcout = 8;
+                break;
+            case 4:  // Taches de graisse
+                surcout = 15;
+                break;
+            default:
+                surcout = 0;
+        }
+        return super.calculerPrixTotal() + surcout;
     }
 
-    private double calculerSurcoutTypeSalissure() {
-        // Calcul du surcoût selon le type de salissure
+    @Override
+    public void afficherPrestation() {
+        super.afficherPrestation();
+        System.out.println("Prestation pour véhicule très sale avec type de salissure: " + typeSalissure);
     }
 }
