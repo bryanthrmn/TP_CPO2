@@ -1,5 +1,6 @@
 package tp3;
-public class PrestationExpress extends Prestation {
+
+class PrestationExpress extends Prestation {
     private boolean nettoyageInterieur;
 
     public PrestationExpress(char categorieVehicule, boolean nettoyageInterieur) {
@@ -9,24 +10,20 @@ public class PrestationExpress extends Prestation {
 
     @Override
     public double calculerPrixTotal() {
-        double prix = 0;
-        prix += calculerLavage();
-        prix += calculerSechage();
+        double prix = calculerPrixLavage() + calculerPrixSechage();
         if (nettoyageInterieur) {
-            prix += calculerNettoyageInterieur();
+            if (categorieVehicule == 'C') {
+                prix += 40;  // Prix pour nettoyage intérieur catégorie C
+            } else {
+                prix += 30;  // Prix pour nettoyage intérieur catégories A et B
+            }
         }
         return prix;
     }
 
-    private double calculerLavage() {
-        // Calcul du prix du lavage selon la catégorie
-    }
-
-    private double calculerSechage() {
-        // Calcul du prix du séchage selon la catégorie
-    }
-
-    private double calculerNettoyageInterieur() {
-        // Calcul du prix de nettoyage intérieur
+    @Override
+    public void afficherPrestation() {
+        super.afficherPrestation();
+        System.out.println("Prestation Express, Nettoyage intérieur: " + (nettoyageInterieur ? "Oui" : "Non"));
     }
 }
