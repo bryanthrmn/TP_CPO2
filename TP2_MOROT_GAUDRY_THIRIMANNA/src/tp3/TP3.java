@@ -1,13 +1,18 @@
 package tp3;
-public class TP3 {
+import java.time.LocalDateTime;
 
+public class Main {
+    public static void main(String[] args) {
+        Etablissement etablissement = new Etablissement("Station de Nettoyage");
 
- public static void main(String[] args) {
-       Client C1,C2;
-       C1 = new Client(1, "Bryan","0767290336","bryan.thirimanna@epfedu.fr");
-       System.out.println(C1);
-       C2 = new Client(2, "Camille", "0749724656", "camille.galipeau@etu.u-paris.fr");
-       System.out.println(C2);
+        // Ajouter un client
+        Client client1 = etablissement.ajouterClient("Dupont", "0123456789");
+
+        // Ajouter une prestation express
+        PrestationExpress prestationExpress = new PrestationExpress('A', true);
+        RendezVous rdv1 = new RendezVous(client1, prestationExpress, LocalDateTime.now().plusDays(1).withHour(10).withMinute(0));
+        
+        etablissement.ajouterRendezVous(rdv1);
+        etablissement.afficherPlanning();
     }
-
 }
