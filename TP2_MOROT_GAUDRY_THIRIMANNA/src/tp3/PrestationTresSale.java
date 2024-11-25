@@ -1,7 +1,12 @@
+// Bryan THIRIMANNA & Thomas MOROT-GAUDRY
+// 2A - Semestre 3
+// Projet 1 Java
+// Novembre - Décembre 2024
+
 package tp3;
 
-class PrestationTresSale extends PrestationSale {
-    private int typeSalissure;
+public class PrestationTresSale extends PrestationSale {
+    private final int typeSalissure;
 
     public PrestationTresSale(char categorieVehicule, int typeSalissure) {
         super(categorieVehicule);
@@ -9,30 +14,20 @@ class PrestationTresSale extends PrestationSale {
     }
 
     @Override
-    public double calculerPrixTotal() {
-        double surcout = 0;
-        switch (typeSalissure) {
-            case 1:  // Taches de nourriture
-                surcout = 5;
-                break;
-            case 2:  // Taches de boue
-                surcout = 10;
-                break;
-            case 3:  // Taches de transpiration
-                surcout = 8;
-                break;
-            case 4:  // Taches de graisse
-                surcout = 15;
-                break;
-            default:
-                surcout = 0;
-        }
-        return super.calculerPrixTotal() + surcout;
+    public double calculerPrix() {
+        double prix = super.calculerPrix();
+        double surcout = switch (typeSalissure) {
+            case 1 -> 5; // Nourriture
+            case 2 -> 7; // Boue
+            case 3 -> 10; // Transpiration
+            case 4 -> 12; // Graisse
+            default -> 0;
+        };
+        return prix + surcout;
     }
 
     @Override
-    public void afficherPrestation() {
-        super.afficherPrestation();
-        System.out.println("Prestation pour véhicule très sale avec type de salissure: " + typeSalissure);
+    public String toString() {
+        return super.toString() + " - Type de salissure: " + typeSalissure;
     }
 }
