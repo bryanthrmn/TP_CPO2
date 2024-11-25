@@ -1,21 +1,29 @@
+// Bryan THIRIMANNA & Thomas MOROT-GAUDRY
+// 2A - Semestre 3
+// Projet 1 Java
+// Novembre - Décembre 2024
+
 package tp3;
 
 import java.time.LocalDateTime;
 
 public class RendezVous {
-    private Client client;
-    private Prestation prestation;
-    private LocalDateTime dateHeure;
-    private double prix;
+    private final Client client;
+    private final Prestation prestation;
+    private final LocalDateTime horaire;
 
-    public RendezVous(Client client, Prestation prestation, LocalDateTime dateHeure) {
+    public RendezVous(Client client, Prestation prestation, LocalDateTime horaire) {
         this.client = client;
         this.prestation = prestation;
-        this.dateHeure = dateHeure;
-        this.prix = prestation.calculerPrixTotal();
+        this.horaire = horaire;
     }
 
+    @Override
     public String toString() {
-        return "Rendez-vous pour " + client + " à " + dateHeure + ", Prestation: " + prestation + ", Prix: " + prix + " €";
+        return horaire + " - " + client + " - " + prestation + " - Prix: " + prestation.calculerPrix() + "€";
+    }
+
+    public String versFichier() {
+        return horaire + "\n" + client.getNumeroClient() + "\n" + prestation + " : " + prestation.calculerPrix();
     }
 }
