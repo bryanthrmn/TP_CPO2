@@ -1,7 +1,12 @@
+// Bryan THIRIMANNA & Thomas MOROT-GAUDRY
+// 2A - Semestre 3
+// Projet 1 Java
+// Novembre - Décembre 2024
+
 package tp3;
 
-class PrestationExpress extends Prestation {
-    private boolean nettoyageInterieur;
+public class PrestationExpress extends Prestation {
+    private final boolean nettoyageInterieur;
 
     public PrestationExpress(char categorieVehicule, boolean nettoyageInterieur) {
         super(categorieVehicule);
@@ -9,21 +14,42 @@ class PrestationExpress extends Prestation {
     }
 
     @Override
-    public double calculerPrixTotal() {
-        double prix = calculerPrixLavage() + calculerPrixSechage();
+    public double calculerPrix() {
+        double prix = calculerLavage() + calculerSechage();
         if (nettoyageInterieur) {
-            if (categorieVehicule == 'C') {
-                prix += 40;  // Prix pour nettoyage intérieur catégorie C
-            } else {
-                prix += 30;  // Prix pour nettoyage intérieur catégories A et B
-            }
+            prix += calculerNettoyageInterieur();
         }
         return prix;
     }
 
+    private double calculerLavage() {
+        return switch (categorieVehicule) {
+            case 'A' -> 20;
+            case 'B' -> 30; // 50% de majoration
+            case 'C' -> 35; // 75% de majoration
+            default -> 0;
+        };
+    }
+
+    private double calculerSechage() {
+        return switch (categorieVehicule) {
+            case 'A' -> 10;
+            case 'B' -> 10.5; // 5% de majoration
+            case 'C' -> 11; // 10% de majoration
+            default -> 0;
+        };
+    }
+
+    private double calculerNettoyageInterieur() {
+        return switch (categorieVehicule) {
+            case 'A', 'B' -> 30;
+            case 'C' -> 40;
+            default -> 0;
+        };
+    }
+
     @Override
-    public void afficherPrestation() {
-        super.afficherPrestation();
-        System.out.println("Prestation Express, Nettoyage intérieur: " + (nettoyageInterieur ? "Oui" : "Non"));
+    public String toString() {
+        return super.toString() + " - Prestation Express (Interieur: " + nettoyageInterieur + ")";
     }
 }
