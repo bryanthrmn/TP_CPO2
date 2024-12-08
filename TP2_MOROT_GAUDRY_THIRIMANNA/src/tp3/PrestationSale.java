@@ -7,43 +7,20 @@ package tp3;
 
 public class PrestationSale extends Prestation {
     public PrestationSale(char categorieVehicule) {
-        super(categorieVehicule);
+        super(categorieVehicule);  // Appel du constructeur 
     }
 
+    // Calculer le prix total de la prestation sale
     @Override
     public double calculerPrix() {
+        // Calcul du prix en fonction des différentes étapes (prélavage, lavage, séchage)
         return calculerPrelavage() + calculerLavage() + calculerSechage();
     }
 
-    private double calculerPrelavage() {
-        return switch (categorieVehicule) {
-            case 'A' -> 5;
-            case 'B' -> 7.5; // 50% de majoration
-            case 'C' -> 8.75; // 75% de majoration
-            default -> 0;
-        };
-    }
-
-    private double calculerLavage() {
-        return switch (categorieVehicule) {
-            case 'A' -> 20;
-            case 'B' -> 30;
-            case 'C' -> 35;
-            default -> 0;
-        };
-    }
-
-    private double calculerSechage() {
-        return switch (categorieVehicule) {
-            case 'A' -> 10;
-            case 'B' -> 10.5;
-            case 'C' -> 11;
-            default -> 0;
-        };
-    }
-
+    // Méthode pour obtenir une représentation textuelle de la prestation sale
     @Override
     public String toString() {
+        // Appelle toString() / ajoute l'information de la prestation sale
         return super.toString() + " - Prestation Sale";
     }
 }
